@@ -12,9 +12,9 @@ class BarReader:
         period_dataframe = self.raw_dataframe.loc[self.start_time:self.end_time]
         return period_dataframe
     
-    def get_bars(self, columns, all_bars=False)
+    def get_bars(self, all_bars=False)
         #Columns are for example Opening, Close etc
         if all_bars == True:
             return self.raw_dataframe
         else:
-            return self.period_dataframe.columns(columns)
+            return self.period_dataframe
