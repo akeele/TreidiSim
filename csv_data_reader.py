@@ -11,7 +11,7 @@ class NasdaqOMXCsvReader:
         # Drop last column, because it is empty
         data.drop(data.columns[len(data.columns)-1], axis=1, inplace=True)
         data = data.set_index(['Date'])
-        return data
+        return data, data.columns
 
 
 
