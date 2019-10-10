@@ -1,5 +1,7 @@
 import pandas
+import os
 from asset_finder import AssetFinder
+
 
 class NasdaqOMXCsvReader:
 
@@ -12,9 +14,20 @@ class NasdaqOMXCsvReader:
                      "Closing price": "close",
                      "Total volume": "volume"}
 
-    def __init__(self, assets):
-        self.assets = assets
-        self.assets_csv_files = AssetFinder(self.assets).find_assets_csv_files(self.NASDAQ_OMX_CSV_DIRECTORY)
+    def __init__(self, assets=None, all_assets=False):
+        self.all_assets = all_assets
+        if self.all_assets == True:                                                                                                                                 self.assets_csv_files = self._get_all_csv_files()
+        else:
+            self.assets = assets
+            self.assets_csv_files = AssetFinder(self.assets).find_assets_csv_files(self.NASDAQ_OMX_CSV_DIRECTORY)  
+    
+    def _get_all_csv_files(self):
+        csv_files = os.listdir(self.NASDAQ_OMX_CSV_DIRECTORY)
+        tickers = [filename.split(".")[0] for filename in csv_files]
+        csv_files = [os.path.join(self.NASDAQ_OMX_CSV_DIRECTORY, filename) for filename in csv_files]
+
+        assets_csv_files = dict(zip(tickers, csv_files))
+        return assets_csv_files
 
     def _read_to_pandas_dataframe(self, csv_file):
         data = pandas.read_csv(csv_file, sep=';', header=1, decimal=',')
