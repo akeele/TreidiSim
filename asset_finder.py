@@ -10,7 +10,6 @@ class AssetFinder:
         
         csv_files = os.listdir(csv_directory)
         csv_tickers = [filename.split(".")[0] for filename in csv_files]
-        #csv_files = [os.path.join(csv_directory, filename) for filename in csv_files]
         
         for asset in self.assets:
             if asset.ticker in csv_tickers:
