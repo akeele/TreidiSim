@@ -16,7 +16,8 @@ class NasdaqOMXCsvReader:
 
     def __init__(self, assets=None, all_assets=False):
         self.all_assets = all_assets
-        if self.all_assets == True:                                                                                                                                 self.assets_csv_files = self._get_all_csv_files()
+        if self.all_assets == True:
+            self.assets_csv_files = self._get_all_csv_files()
         else:
             self.assets = assets
             self.assets_csv_files = AssetFinder(self.assets).find_assets_csv_files(self.NASDAQ_OMX_CSV_DIRECTORY)  
