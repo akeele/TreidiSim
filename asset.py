@@ -1,8 +1,8 @@
-class Asset:
-    
-    def __init__(self, name, ticker, country):
-        self.name = name
-        self.ticker = ticker
-        self.country = country
+from dataclasses import dataclass
 
-   
+@dataclass
+class Asset:
+
+    sid: int
+    ticker: str
+    currency: str
